@@ -12,9 +12,10 @@ img.bg {
 #wrapper {
   position: relative;
   overflow: hidden;
-  height: 950px;
+  height: 855px;
 }
 .dog {
+  color: white;
   background-color: brown;
   position: absolute;
   width: 50px;
@@ -23,14 +24,16 @@ img.bg {
   z-index: 1;
 }
 .cat {
+  color: white;
   background-color: black;
   position: absolute;
   width: 50px;
   height: 50px;
   display: inline-block;
   z-index: 0;
+  transition: top 1s, left 1s;
 }
-.acorn {
+/* .acorn {
   background-color: gray;
   position: absolute;
   width: 20px;
@@ -38,3 +41,5 @@ img.bg {
   display: inline-block;
   z-index: 1;
 }
+ */
+.cat { background-position: -100px -160px; }
