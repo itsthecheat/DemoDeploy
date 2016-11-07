@@ -3,9 +3,11 @@ $(document).ready(function() {
 
     console.log("linked");
 
-    var $dog = $('.dog'); //global variables
-    var body = $('body');
+
+    var $dog = $('#dog'); //global variables
+    var body = $('#wrapper');
     var $cat = $('.cat');
+
 
 
     function newCat() { //creates a div w/ class cat, appends to body
@@ -22,7 +24,7 @@ $(document).ready(function() {
       }
 
     function getCollision(cat) { //collision detection for elements
-        $(cat).each(function(index, cat) {
+        $(cat).each(function(index, cat) { //loops through each cat div
             var $dogH = $dog.outerHeight(true);
             var $dogW = $dog.outerWidth(true);
             var $dogX = $dog.position();
@@ -39,32 +41,33 @@ $(document).ready(function() {
                 $catX < $dogX.left + $dogW &&
                 $catY < $dogY.top + $dogW) {
                 $(cat).addClass('dead');
+                $('.score').prepend('<img src="images/cat_dead_sm.png" />');
                 setTimeout(function() {
-                  $('.dead').remove();
-                }, 2500);
-                $('#score').prepend('<img src="images/cat_dead_sm.jpg">');
+                  $('.dead').remove(); //removes dead cat after 2s
+                    checkWinner();
+                }, 2000);
                 console.log('boom');
-            }
-        })
-    }
-
-
-    $(document).mousemove(function(event) {
-        $('.dog').css({
-            'top': event.pageY,
-            'bottom': event.pageX,
-            'left': event.pageX,
-            'right': event.pageY
+            };
         });
-        $cat = $('.cat')
-        getCollision($cat);
+    };
+$('#wrapper').mousemove(function(e) { //moves dog div to follow cursor
+        var x = e.pageX - this.offsetLeft;
+        var y = e.pageY - this.offsetTop;
+        $('#dog').css({
+            top: y,
+            left: x,
+        });
+      $cat = $('.cat:not(.dead)');
+      getCollision($cat); //calls function to check distance
     })();
+
 
     function checkWinner() {
       if ($('.cat').length === 0) {
-        alert("WOOF!")
+        alert("WOOF! You Won!");
       };
     };
+
 
 
 
